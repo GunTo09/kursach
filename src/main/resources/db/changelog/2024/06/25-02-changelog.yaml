@@ -1,0 +1,214 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1719313136359-1
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_buyer
+                  name: id_buyer
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: surname
+                  type: VARCHAR(255)
+              - column:
+                  name: telephone_number
+                  type: VARCHAR(255)
+            tableName: buyer
+  - changeSet:
+      id: 1719313136359-2
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_item
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  name: name_item
+                  type: VARCHAR(255)
+              - column:
+                  name: available_quantity
+                  type: BIGINT
+              - column:
+                  name: price
+                  type: BIGINT
+              - column:
+                  name: discount
+                  type: BIGINT
+            tableName: item
+  - changeSet:
+      id: 1719313136359-3
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_order
+                  name: id_order
+                  type: BIGINT
+              - column:
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  name: count_item_in_order
+                  type: BIGINT
+              - column:
+                  name: id_buyer
+                  type: BIGINT
+              - column:
+                  name: id_seller
+                  type: BIGINT
+              - column:
+                  name: date_added_order
+                  type: DATETIME
+            tableName: order
+  - changeSet:
+      id: 1719313136359-4
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_seller
+                  name: id_seller
+                  type: BIGINT
+              - column:
+                  name: name_seller
+                  type: VARCHAR(255)
+              - column:
+                  name: surname_seller
+                  type: VARCHAR(255)
+              - column:
+                  name: number_telephone_seller
+                  type: VARCHAR(255)
+            tableName: seller
+  - changeSet:
+      id: 1719313136359-5
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user_roles
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: user_authority
+                  type: SMALLINT
+              - column:
+                  name: user_id
+                  type: BIGINT
+            tableName: user_roles
+  - changeSet:
+      id: 1719313136359-6
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expired
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: locked
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enabled
+                  type: BOOLEAN
+            tableName: users
+  - changeSet:
+      id: 1719313136359-7
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_buyer
+            baseTableName: order
+            constraintName: FK_ORDER_ON_ID_BUYER
+            referencedColumnNames: id_buyer
+            referencedTableName: buyer
+  - changeSet:
+      id: 1719313136359-8
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_item
+            baseTableName: order
+            constraintName: FK_ORDER_ON_ID_ITEM
+            referencedColumnNames: id_item
+            referencedTableName: item
+  - changeSet:
+      id: 1719313136359-9
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_seller
+            baseTableName: order
+            constraintName: FK_ORDER_ON_ID_SELLER
+            referencedColumnNames: id_seller
+            referencedTableName: seller
+  - changeSet:
+      id: 1719313136359-10
+      author: uvaro (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_roles
+            constraintName: FK_USER_ROLES_ON_USER
+            referencedColumnNames: id
+            referencedTableName: users
+
